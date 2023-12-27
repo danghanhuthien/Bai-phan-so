@@ -1,0 +1,294 @@
+using System;
+using System.Text;
+namespace BTVN1_xd_lop_phanso
+{
+    class Program
+    {
+        static int LC = 0;
+        static int luachon()
+        {
+            int LC;
+            PhanSo.Menu();
+            LC = int.Parse(Console.ReadLine());
+            return LC;
+        }
+        static PhanSo pst1, pst2;
+        static void Main()
+        {
+
+            do
+            {
+                int LC = luachon();
+
+                switch (LC)
+                {
+                    case 1:
+                        pst1 = PhanSo.Nhapps1();
+                        pst2 = PhanSo.Nhapps2();
+                        Console.WriteLine("\n");
+                        PhanSo.RutGon(pst1);
+                        pst1.Inthamlamdep();
+                        PhanSo.RutGon(pst2);
+                        pst2.Inthamlamdep();
+                        Console.WriteLine("\n");
+                        break;
+                    case 2:
+                        Console.WriteLine("\n");
+                        Console.Write("UCLN cua ps1: ");
+                        PhanSo.htUCLN(pst1);
+                        Console.Write("UCLN cua ps2: ");
+                        PhanSo.htUCLN(pst2);
+                        Console.WriteLine("\n");
+                        break;
+                    case 3:
+                        Console.WriteLine("\n");
+                        PhanSo.htBCNN(pst1, pst2);
+                        Console.WriteLine("\n");
+                        break;
+                    case 4:
+                        Console.WriteLine("\n");
+                        PhanSo cong = PhanSo.cong(pst1, pst2);
+                        PhanSo.RutGon(cong);
+                        cong.Inthamlamdep();
+                        Console.WriteLine("\n");
+                        break;
+                    case 5:
+                        Console.WriteLine("\n");
+                        PhanSo tru = PhanSo.tru(pst1, pst2);
+                        PhanSo.RutGon(tru);
+                        tru.Inthamlamdep();
+                        Console.WriteLine("\n");
+                        break;
+                    case 6:
+                        Console.WriteLine("\n");
+                        PhanSo nhan = PhanSo.nhan(pst1, pst2);
+                        PhanSo.RutGon(nhan);
+                        nhan.Inthamlamdep();
+                        Console.WriteLine("\n");
+                        break;
+                    case 7:
+                        Console.WriteLine("\n");
+                        PhanSo chia = PhanSo.chia(pst1, pst2);
+                        PhanSo.RutGon(chia);
+                        chia.Inthamlamdep();
+                        Console.WriteLine("\n");
+                        break;
+                    case 8:
+                        Environment.Exit(0);
+                        break;
+                }
+            } while (LC == 0);
+            Program.luachon();
+            Console.ReadKey();
+        }
+
+        class PhanSo
+        {
+            int tuso;
+            int mauso;
+
+            public PhanSo() // tạo hàm khởi dựng
+            {
+                tuso = 0;
+                mauso = 1;
+            }
+
+            public PhanSo(int TS, int MS) // là hàm khởi dựng nhân các giá trị đầu vào
+            {
+                this.tuso = TS;
+                this.mauso = MS;
+            }
+
+            public static void Menu()
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("chuong trinh thuc hien cac phan so");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("1.   Them phan so");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("2.   Tim UCLN");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("3.   Tim BCNN");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine("4.   Thuc hien phep cong");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("5    Thuc hien phep tru");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("6.   Thuc hien phep nhan");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("7.   Thuc hien phep chia");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("8.   Exit");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Moi ban thao tac: ");
+                Console.ResetColor();
+
+            }
+            public static PhanSo Nhapps1()
+            {
+                PhanSo Ps1 = new PhanSo();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Nhap tu so thu nhat cua ps1:  ");
+                Console.ResetColor();
+                Ps1.tuso = int.Parse(Console.ReadLine());
+                do
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("Nhap mau so thu nhat cua ps1: ");
+                    Console.ResetColor();
+                    Ps1.mauso = int.Parse(Console.ReadLine());
+                } while (Ps1.mauso == 0);
+                return Ps1;
+            }
+            public static PhanSo Nhapps2()
+            {
+                PhanSo Ps2 = new PhanSo();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Nhap tu so thu nhat cua ps2:  ");
+                Console.ResetColor();
+                Ps2.tuso = int.Parse(Console.ReadLine());
+                do
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("Nhap mau so thu nhat cua ps2: ");
+                    Console.ResetColor();
+                    Ps2.mauso = int.Parse(Console.ReadLine());
+                } while (Ps2.mauso == 0);
+                return Ps2;
+            }
+            public static int UCLN(int TS, int MS)
+            {
+                TS = Math.Abs(TS);
+                MS = Math.Abs(MS);
+                while (MS != 0)
+                {
+                    int bien = MS;
+                    MS = TS % MS;
+                    TS = bien;
+                }
+                return TS;
+            }
+
+            public static void htUCLN(PhanSo ps)
+            {
+                int u = UCLN(ps.tuso, ps.mauso);
+                Console.Write(u + "\n");
+            }
+            public static int BCNN(int MS1, int MS2)
+            {
+                return MS1 * MS2 / UCLN(MS1, MS2);
+            }
+
+            public static void htBCNN(PhanSo Ps1, PhanSo Ps2)
+            {
+                int c, d;
+                if (Ps1.mauso % UCLN(Ps1.tuso, Ps1.mauso) == 0)
+                {
+                    c = Ps1.mauso / UCLN(Ps1.tuso, Ps1.mauso);
+                    // c = Math.Abs(c);
+                }
+                else
+                {
+                    c = Ps1.mauso;
+                }
+                if (Ps2.mauso % UCLN(Ps2.tuso, Ps2.mauso) == 0)
+                {
+                    d = Ps2.mauso / UCLN(Ps2.tuso, Ps2.mauso);
+                    // d = Math.Abs(d);
+                }
+                else
+                {
+                    d = Ps2.mauso;
+                }
+                Console.WriteLine("BCNN cua 2ps la: " + BCNN(c, d));
+
+            }
+            public static PhanSo RutGon(PhanSo ps)
+            {
+                int ucln = UCLN(ps.tuso, ps.mauso);// phải làm như vậy để tính ucln 1 lần
+                ps.tuso = ps.tuso / ucln;          // tránh tình trạng tuso = 1 số khác.
+                ps.mauso = ps.mauso / ucln;
+                if (ps.mauso < 0 || ps.tuso < 0 && ps.mauso < 0)
+                {
+                    ps.tuso = -ps.tuso;
+                    ps.mauso = -ps.mauso;
+                }
+                return ps;
+            }
+            public void Inthamlamdep()
+            {
+                if (tuso == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("PS ban nhap da duoc lam dep va ket qua: {0}", tuso);
+                    Console.ResetColor();
+                }
+                else if (mauso == 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("PS ban nhap da duoc lam dep va ket qua: {0}", tuso);
+                    Console.ResetColor();
+                }
+                else if (mauso == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("PS ban nhap da duoc lam dep va ket qua: 0");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("PS ban nhap da duoc lam dep va ket qua: {0}/{1}", tuso, mauso);
+                    Console.ResetColor();
+                }
+            }
+            public static PhanSo cong(PhanSo ps1, PhanSo ps2)
+            {
+                PhanSo ps = new PhanSo();
+                ps.tuso = ps1.tuso * BCNN(ps1.mauso, ps2.mauso) / ps1.mauso + ps2.tuso * BCNN(ps1.mauso, ps2.mauso) / ps2.mauso;
+                ps.mauso = BCNN(ps1.mauso, ps2.mauso);
+                return ps;
+            }
+            public static PhanSo tru(PhanSo ps1, PhanSo ps2)
+            {
+                PhanSo ps = new PhanSo();
+                ps.tuso = ps1.tuso * BCNN(ps1.mauso, ps2.mauso) / ps1.mauso - ps2.tuso * BCNN(ps1.mauso, ps2.mauso) / ps2.mauso;
+                ps.mauso = BCNN(ps1.mauso, ps2.mauso);
+                return ps;
+            }
+            public static PhanSo nhan(PhanSo ps1, PhanSo ps2)
+            {
+                PhanSo ps = new PhanSo();
+                ps.tuso = ps1.tuso * ps2.tuso;
+                ps.mauso = ps1.mauso * ps2.mauso;
+                return ps;
+            }
+            public static PhanSo chia(PhanSo ps1, PhanSo ps2)
+            {
+                PhanSo ps = new PhanSo();
+                ps.tuso = ps1.tuso * ps2.mauso;
+                ps.mauso = ps1.mauso * ps2.tuso;
+                return ps;
+            }
+        }
+    }
+}
